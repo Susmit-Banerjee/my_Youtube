@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { dateFormatFunction, viewCountFormatFunction } from "../utils/helper";
 
 const VideoCard = ({ videoDetails }) => {
   return (
@@ -16,9 +17,9 @@ const VideoCard = ({ videoDetails }) => {
         <p className="text-gray-500">{videoDetails?.snippet?.channelTitle}</p>
 
         <p className="text-gray-500">
-          {videoDetails?.statistics?.viewCount} views
+          {viewCountFormatFunction(videoDetails?.statistics?.viewCount)} views
         </p>
-        <p className="text-gray-500">{videoDetails?.snippet?.publishedAt}</p>
+        <p className="text-gray-500">{dateFormatFunction(videoDetails?.snippet?.publishedAt)}</p>
       </div>
     </Link>
   );

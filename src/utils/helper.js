@@ -1,3 +1,59 @@
+export const viewCountFormatFunction=(views)=>{
+  let viewsCountText=views;
+  if(views>=1000000000){
+    viewsCountText = Math.floor(views/1000000000)+ "B"; 
+  }
+  else if(views>=1000000){
+    viewsCountText = Math.floor(views/1000000)+ "M";
+  }
+  else if(views>=1000){
+    viewsCountText = Math.floor(views/1000) +"K";
+  }
+  return viewsCountText;
+}
+
+
+export const dateFormatFunction = (dateString)=>{
+  const isoDate = new Date(dateString);
+  const year = isoDate.getFullYear();
+  const month = isoDate.getMonth();
+  const date = isoDate.getDate();
+  let publishedTime = "";
+  const todayDate = new Date()
+  const yearNow = todayDate.getFullYear();
+  const monthNow = todayDate.getMonth();
+  const dateNow = todayDate.getDate();
+
+  if(year === yearNow){
+    if(month<monthNow){
+      publishedTime = monthNow-month + " months ago";
+    }
+    else if(month===monthNow){
+      if(date<dateNow){
+        publishedTime = dateNow-date +" days ago";
+      }else{
+        publishedTime = "Today";
+      }
+    }
+  }
+  else if(year < yearNow){
+    if(yearNow - year === 1 && month>monthNow){
+      publishedTime = monthNow+1 + (11-month) +" months ago";
+    }
+    else if(month < monthNow){
+      publishedTime = yearNow - year +" years ago";  
+    }
+    else if(month> monthNow){
+      publishedTime = yearNow - year + 1 +" years ago";
+    }
+  }
+  else{
+    publishedTime = isoDate.toDateString();
+  }
+  return publishedTime;
+}
+
+
 let firstName = ["Alice","Amy","Anne","Arya","Charles","Charlotte","Elizabeth","Poppy","Daniel","Arthur","Emily","Fern","Gabriel","Harry","Henry","Herman","Hermione","Samuel","Chloe","Sara","Huckleberry","James","Jane","John","Julie","Laura","Leo","Lewis","Isla","Eva","Lucy","Nicholas","Oliver","Philip","Ramona","George","Noah","Selig","Wilbur","Thomas","Madeline","Meghan","Ralph","Jessica","Lilly","Iris","Freya","Alfie","William","Tony","Matilda","Margaret","Mike","Aurora","Hugo","Ethan","Amelia","Evelyn","Zelda","Sherlock"]
 let surName = ["Allen","Brooks","Cooper","Davidson","Jones","Murphy","Perry","Roberts","Stevens","Taylor","Adams","Barnes","Collins","Elliott","Hughes","Morris","Pearson","Richardson","Simpson","Thomson","Baker","Bailey","Carter","Evans","Holmes","Miller","Parker","Reynolds","Smith","Wright","Atkinson","Armstrong","Butler","Fisher","Harris","Matthews","Owen","Powell","Russell","Watts","Lee","Anderson","Brown","Grant","Green","Lawrence","Murray","Phillips","Robertson","Watson"]
 
