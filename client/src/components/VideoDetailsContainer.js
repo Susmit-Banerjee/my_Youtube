@@ -1,30 +1,35 @@
-
+import { dateFormatFunction, viewCountFormatFunction } from "../utils/helper";
 import { Dislike, LikeSVG, UserSvg, SubscribeSVG } from "../assets/SVG";
-const VideoDetailsContainer = ({videoDetails}) => {
+const VideoDetailsContainer = ({ videoDetails }) => {
   return (
-    <div id="video-info" className="m-5 ml-8">
+    <div id="video-info" className="w-full px-2 my-2 lg:px-8">
       <div id="video name">
-        <h1 className="text-lg font-medium">
+        <h1 className="md:text-lg font-semibold">
           {videoDetails[0]?.snippet?.title}
         </h1>
       </div>
 
-      <div id="channel-info" className="my-4 flex justify-between">
+      <div id="channel-info" className="my-2 lg:flex lg:justify-between">
+
         <div className="flex gap-2 items-center">
           <UserSvg width="40px" height="40px" />
-          <div>
-            <p className="font-medium ">{videoDetails[0]?.snippet?.channelTitle}</p>
+          <div className="flex pl-2 py-1 gap-2 md:gap-6 items-center lg:block lg:p-0">
+            <p className="text-sm lg:text-base font-medium max-w-[60%] lg:max-w-none video-title-cutoff">
+              {videoDetails[0]?.snippet?.channelTitle}
+            </p>
             <p className="text-xs text-gray-500">112k subscribers</p>
           </div>
         </div>
 
-        <div id="btns" className="flex my-2">
+        <div id="btns" className="flex my-2 mx-2">
           <button
             id="like btn"
             className="flex items-center px-3 rounded-l-full  border-r-2 bg-gray-100 hover:bg-gray-200 cursor-pointer"
           >
             <LikeSVG width="25px" height="25px" />
-            <p className="text-sm font-medium">{videoDetails[0]?.statistics.likeCount}</p>
+            <p className="text-sm font-medium">
+              {viewCountFormatFunction(videoDetails[0]?.statistics.likeCount)}
+            </p>
           </button>
 
           <button
@@ -52,12 +57,25 @@ const VideoDetailsContainer = ({videoDetails}) => {
           </div>
         </div>
       </div>
-      <div id="video-descriptions" className="bg-gray-200 rounded-lg p-2">
-        <p className="font-medium">
-          <span>{videoDetails[0]?.statistics.viewCount} </span>
-          <span>{videoDetails[0]?.snippet?.publishedAt}</span>
+
+      <div
+        id="video-descriptions"
+        className="w-full border-2 border-gray-300 rounded-lg p-2 text-sm flex flex-col"
+      >
+        <p className="py-2 font-medium">
+          <span>
+            {viewCountFormatFunction(videoDetails[0]?.statistics?.viewCount) +
+              " views"}{" "}
+          </span>
+          <span className="mx-1">•</span>
+          <span>
+            {dateFormatFunction(videoDetails[0]?.snippet?.publishedAt)}
+          </span>
         </p>
-        <pre className="tracking-tighter text-sm">{videoDetails[0]?.snippet?.description}</pre>
+        <pre className="description mb-2">
+          {videoDetails[0]?.snippet?.description}
+        </pre>
+        <input type="checkbox" className="expand-btn justify-self-center" />
       </div>
     </div>
   );

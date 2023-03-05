@@ -8,9 +8,9 @@ import { commentsData } from "../utils/config";
 const CommentCard = ({ data }) => {
   const { name, text, likes } = data;
   return (
-    <div className="my-2 p-1 flex gap-4 border-2 rounded-lg border-gray-200">
+    <div className="my-2 p-1 flex gap-4 border lg:border-2 rounded-lg border-gray-200">
       <div>
-        <UserSvg width="40px" height="40px" />
+        <UserSvg width="30px" height="30px" />
       </div>
       <div>
         <p className="text-sm font-semibold">{name}</p>
@@ -29,8 +29,8 @@ const CommentsList = ({ comments }) =>
   comments.map((comment, index) => (
     <div>
       <CommentCard key={index} data={comment} />
-      <div className="pl-6 border-l-2 border-l-gray-200">
-        <CommentsList key={index} comments={comment?.replies} />
+      <div className="pl-3 border-l lg:pl-6 lg:border-l-2 border-l-gray-200">
+        <CommentsList comments={comment?.replies} />
       </div>
     </div>
   ));

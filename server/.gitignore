@@ -3,3 +3,4 @@ dist/
 *.md
 node_modules/
 .vscode/
+.env

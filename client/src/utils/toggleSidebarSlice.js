@@ -4,6 +4,7 @@ const toggleSidebarSlice = createSlice({
   name: "toggleSidebar",
   initialState: {
     isSidebarOpen: true,
+    isWatchPage: null,
   },
   reducers: {
     toggleMenu: (state) => {
@@ -14,8 +15,11 @@ const toggleSidebarSlice = createSlice({
     },
     closeMenu: (state)=>{
       state.isSidebarOpen = false;
+    },
+    setIsWatchPage: (state,action)=>{
+      state.isWatchPage = action.payload;
     }
   },
 });
-export const {toggleMenu, closeMenu, openMenu} = toggleSidebarSlice.actions;
+export const {toggleMenu, closeMenu, openMenu, setIsWatchPage} = toggleSidebarSlice.actions;
 export default toggleSidebarSlice.reducer;

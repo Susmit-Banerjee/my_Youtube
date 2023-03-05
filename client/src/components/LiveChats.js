@@ -36,8 +36,8 @@ const LiveChats = () => {
 
 
   return (
-    <div className="w-5/6 h-[580px] flex justify-center pt-4">
-      <div className="w-3/5 border border-gray-300 rounded-lg flex flex-col justify-between p-4 pb-1">
+    <div className="w-full lg:w-5/6 h-[550px] flex justify-center">
+      <div className="w-full md:w-[90%] lg:w-3/5 border border-gray-300 rounded-lg flex flex-col justify-between px-4 pb-1">
         <div className="border-b border-b-gray-300">
           <p className="text-xl pb-2">Top Chats</p>
         </div>

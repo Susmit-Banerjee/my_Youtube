@@ -54,7 +54,7 @@ export const SearchSvg = ({ width, height }) => {
   );
 };
 
-export const UserSvg = ({width, height}) => (
+export const UserSvg = ({ width, height }) => (
   <svg
     width={width}
     height={height}
@@ -340,6 +340,36 @@ export const SubscribeSVG = () => (
           </polygon>{" "}
         </g>{" "}
       </g>{" "}
+    </g>
+  </svg>
+);
+
+export const LeftArrowSvg = () => (
+  <svg
+    height="25px"
+    width="25px"
+    version="1.1"
+    viewBox="0 0 200.022 200.022"
+    fill="#696969"
+    stroke="#696969"
+  >
+    <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+    <g
+      id="SVGRepo_tracerCarrier"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    ></g>
+    <g id="SVGRepo_iconCarrier">
+      <g>
+        <g>
+          <g>
+            <path
+              fill="#696969"
+              d="M184.994,200.022l-7.77-0.744c0-72.482-42.001-83.305-67.035-83.305 c-4.67,0-8.528,0.39-11.019,0.73v57.018L12.307,86.859L99.169,0v54.774c28.616,2.584,50.755,13.754,65.808,33.23 C197.913,130.578,185.534,197.209,184.994,200.022z M110.189,108.139c18.055,0,55.308,5.705,69.355,50.394 c-0.995-21.054-5.816-46.436-20.782-65.761c-14.262-18.428-35.713-28.67-63.764-30.452l-3.672-0.233V18.925l-67.93,67.934 l67.93,67.941v-44.557l3.081-0.676C94.671,109.502,100.98,108.139,110.189,108.139z"
+            ></path>
+          </g>
+        </g>
+      </g>
     </g>
   </svg>
 );
