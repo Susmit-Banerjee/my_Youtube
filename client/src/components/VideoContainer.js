@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { SEARCH_API, YOUTUBE_VIDEOS_API } from "../utils/config";
 import { setIsWatchPage } from "../utils/toggleSidebarSlice";
 import VideoCard from "./VideoCard";
 
@@ -13,25 +12,19 @@ const VideoContainer = () => {
 
   const dispatch = useDispatch();
 
-  console.log("country change");
   useEffect(() => {
     dispatch(setIsWatchPage(false));
   }, []);
 
   useEffect(() => {
     getVideos();
-    console.log("api called");
   }, [country, categoryId]);
 
   const getVideos = async () => {
     const data = await fetch("http://localhost:5000/api?countryId="+country+(categoryId ? "&videoCategoryId=" + categoryId : ""));
-    // const data = await fetch(
-    //   YOUTUBE_VIDEOS_API +
-    //     country +
-    //     (categoryId ? "&videoCategoryId=" + categoryId : "")
-    // );
+    
     const jsonData = await data.json();
-    console.log(jsonData.items);
+    console.log(jsonData.items);  
     setVideos(jsonData.items);
   };
 

@@ -2,13 +2,15 @@ const express = require("express");
 const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args));
 
-const cors = require('cors');
+const cors = require("cors");
 
 const app = express();
 
-app.use(cors({
-    origin:"http://localhost:1234"    
-}))
+app.use(
+  cors({
+    origin: "http://localhost:1234",
+  })
+);
 
 app.get("/", async (req, res) => {
   res.json({ msg: "I love Ganyu" });
@@ -19,7 +21,11 @@ app.get("/api", async (req, res) => {
   const YOUTUBE_VIDEOS_API =
     "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&key=" +
     API_KEY +
-    "&regionCode="+req.query.countryId+(req.query.videoCategoryId ? "&videoCategoryId=" + req.query.videoCategoryId : "");
+    "&regionCode=" +
+    req.query.countryId +
+    (req.query.videoCategoryId
+      ? "&videoCategoryId=" + req.query.videoCategoryId
+      : "");
   try {
     let responseData = await fetch(YOUTUBE_VIDEOS_API);
     let jsonData = await responseData.json();
@@ -30,9 +36,23 @@ app.get("/api", async (req, res) => {
   }
 });
 
+app.get("/autocomplete", async (req, res) => {
+  const SEARCH_API =
+    "http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=";
+  try {
+    const data = await fetch(SEARCH_API + req.query.q);
+    const jsonData = await data.json();
+    res.status(200).json(jsonData[1]);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: "Internal Server Error" });
+  }
+});
+
 app.get("/suggestions", async (req, res) => {
   const SUGGESTIONS_API =
-    "https://youtube-v3-alternative.p.rapidapi.com/related?geo=US&lang=en&id="+req.query.video_id;
+    "https://youtube-v3-alternative.p.rapidapi.com/related?geo=US&lang=en&id=" +
+    req.query.video_id;
 
   const options = {
     method: "GET",
@@ -53,14 +73,41 @@ app.get("/suggestions", async (req, res) => {
 
 app.get("/video_details", async (req, res) => {
   const API_KEY = "AIzaSyC5EszJGoV5NOVEnQnqvV2CZaBU-nMNWKI";
-  const VIDEO_DETAILS_API ="https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&key=" + API_KEY + "&id="+req.query.video_id;
+  const VIDEO_DETAILS_API =
+    "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&key=" +
+    API_KEY +
+    "&id=" +
+    req.query.video_id;
   try {
     const videoInfo = await fetch(VIDEO_DETAILS_API);
     const jsonVideoInfo = await videoInfo.json();
     res.status(200).json(jsonVideoInfo);
   } catch (error) {
     console.log(error);
-    res.status(500).json({msg:"Internal Server Error"})
+    res.status(500).json({ msg: "Internal Server Error" });
+  }
+});
+
+app.get("/results", async (req, res) => {
+  const options = {
+    method: "GET",
+    headers: {
+      "X-RapidAPI-Key": "4c92f5f78cmshc8f7ab49ce98c00p19c8c4jsne5a30d3df20b",
+      "X-RapidAPI-Host": "youtube-data8.p.rapidapi.com",
+    },
+  };
+
+  try {
+    const data = await fetch(
+      "https://youtube-data8.p.rapidapi.com/search/?hl=en&gl=US&q=" +
+        req.query.search_query,
+      options
+    );
+    const jsonData = await data.json();
+    res.status(200).json(jsonData.contents);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: "Internal Server Error" });
   }
 });
 

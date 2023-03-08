@@ -28,7 +28,7 @@ const VideoDetailsContainer = ({ videoDetails }) => {
           >
             <LikeSVG width="25px" height="25px" />
             <p className="text-sm font-medium">
-              {viewCountFormatFunction(videoDetails[0]?.statistics.likeCount)}
+              {viewCountFormatFunction(videoDetails[0]?.statistics?.likeCount)}
             </p>
           </button>
 
@@ -65,7 +65,7 @@ const VideoDetailsContainer = ({ videoDetails }) => {
         <p className="py-2 font-medium">
           <span>
             {viewCountFormatFunction(videoDetails[0]?.statistics?.viewCount) +
-              " views"}{" "}
+              " views"}
           </span>
           <span className="mx-1">•</span>
           <span>
@@ -82,4 +82,3 @@ const VideoDetailsContainer = ({ videoDetails }) => {
 };
 export default VideoDetailsContainer;
 
-//((?:https\:\/\/)|(?:http\:\/\/)|(?:www\.))?([a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(?:\??)[a-zA-Z0-9\-\._\?\,\'\/\\\+&%\$#\=~]+)

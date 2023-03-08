@@ -5,9 +5,7 @@ const API_KEY = "AIzaSyC5EszJGoV5NOVEnQnqvV2CZaBU-nMNWKI";
 export const YOUTUBE_VIDEOS_API =
   "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&key=" + API_KEY+"&regionCode=";
 
-export const SEARCH_API =
-  "https://auto-suggest-queries.p.rapidapi.com/suggestqueries?query=";
-//export const SEARCH_API = "http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=";
+  export const SEARCH_API = "http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=";
 
 
 export const VIDEO_DETAILS_API = "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&key="+API_KEY+"&id=";

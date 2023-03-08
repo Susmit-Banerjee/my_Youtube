@@ -12,9 +12,9 @@ const Sidebar = () => {
   const dispatch = useDispatch();
   
   const inactiveStyle =
-    "px-4 py-1 rounded-lg hover:bg-gray-600 hover:text-white scursor-pointer text-sm";
+    "px-4 md:mr-8 py-1 rounded-lg hover:bg-gray-600 hover:text-white scursor-pointer text-sm";
   const activeStyle =
-    "px-4 py-1 rounded-lg bg-gray-600 cursor-pointer text-white";
+    "px-4 md:mr-8 py-1 rounded-lg bg-gray-600 cursor-pointer text-white";
 
   return (
     <div className="w-full">

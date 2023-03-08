@@ -54,7 +54,6 @@ const LiveChats = () => {
           className="mt-2 pt-2"
           onSubmit={(e) => {
             e.preventDefault();
-            //console.log(myMessage);
             dispatch(
               addMessage({
                 name: "Susmit Banerjee",

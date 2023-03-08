@@ -1,26 +1,17 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Form, Link} from "react-router-dom";
 import { SearchSvg } from "../assets/SVG";
-import { SEARCH_API } from "../utils/config";
 import { setCacheResults } from "../utils/searchSlice";
-
 
 const Searchbar = () => {
   const [showSuggestion, setShowSuggestion] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [isInputActive, setInputActive]= useState(false);
+  const [inputQuery, setInputQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
-
   const searchCache = useSelector((store) => store.searchCache);
 
   const dispatch = useDispatch();
-
-  const options = {
-    method: "GET",
-    headers: {
-      "X-RapidAPI-Key": "4c92f5f78cmshc8f7ab49ce98c00p19c8c4jsne5a30d3df20b",
-      "X-RapidAPI-Host": "auto-suggest-queries.p.rapidapi.com",
-    },
-  };
 
   useEffect(() => {
     //* make an api call after every key press
@@ -29,8 +20,8 @@ const Searchbar = () => {
 
     //* make api call after 400ms
     const timer = setTimeout(() => {
-      if (searchQuery in searchCache) {
-        setSuggestions(searchCache[searchQuery]);
+      if (inputQuery in searchCache) {
+        setSuggestions(searchCache[inputQuery]);
       } else {
         getSearchSuggestions();
       }
@@ -42,47 +33,78 @@ const Searchbar = () => {
     return () => {
       clearTimeout(timer);
     };
-  }, [searchQuery]);
+  }, [inputQuery]);
 
   const getSearchSuggestions = async () => {
-    const data = await fetch(SEARCH_API + searchQuery, options);
+    const data = await fetch(
+      "http://localhost:5000/autocomplete?q=" + inputQuery
+    );
     const json = await data.json();
     console.log(json);
     setSuggestions(json);
-    dispatch(setCacheResults({ [searchQuery]: json }));
+    dispatch(setCacheResults({ [inputQuery]: json }));
   };
 
   return (
     <div className=" md:w-4/5 lg:w-1/2">
-      <div className="flex justify-between">
+      <Form
+        method="get"
+        action="/results"
+        className="flex justify-between"
+        onSubmit={() => {
+          setShowSuggestion(false);
+        }}
+      >
         <input
           className="px-6 py-1 flex-1 border rounded-l-full border-gray-400 outline-blue-400"
+          name="search_query"
           type="text"
           placeholder="Search"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          onFocus={() => setShowSuggestion(true)}
-          onBlur={() => setShowSuggestion(false)}
+          autoComplete="off"
+          value={inputQuery}
+          onChange={(e) => setInputQuery(e.target.value)}
+          onFocus={()=>setShowSuggestion(true)}
+          onBlur={()=>setInputActive(false)}
         />
-        <button className="px-5 py-1 bg-gray-50 border rounded-r-full border-gray-400 hover:bg-gray-200">
+        {suggestions.length > 0 && showSuggestion &&(
+          <ul id="suggestionList">
+            {suggestions.map((suggestion) => (
+              <li value={suggestion} key={suggestion}>
+                <Link to={"/results?search_query=" + suggestion} onClick={()=>setShowSuggestion(false)} >
+                  {suggestion}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
+        <button
+          type="submit"
+          className="px-5 py-1 bg-gray-50 border rounded-r-full border-gray-400 hover:bg-gray-200"
+        >
           <SearchSvg width="20px" height="20px" />
         </button>
-      </div>
+      </Form>
 
-      {suggestions.length > 0 && showSuggestion && (
+      {/* {suggestions.length > 0 && showSuggestion && (
         <div className="w-3/4 md:w-4/6 fixed lg:w-[44%] bg-white border border-gray-300 rounded-md">
           <ul className="my-3">
             {suggestions.map((suggestion) => (
               <li
-                className="flex items-center gap-4 py-1 px-2 md:px-4 hover:bg-gray-100"
                 key={suggestion}
+                onFocus={() => setShowSuggestion(true)}
+                onBlur={() => setShowSuggestion(false)}
               >
-                <SearchSvg width="15px" height="15px" /> {suggestion}
+                <Link
+                  to={"/results?search_query=" + suggestion}
+                  className="flex items-center gap-4 py-1 px-2 md:px-4 hover:bg-gray-100"
+                >
+                  <SearchSvg width="15px" height="15px" /> {suggestion}
+                </Link>
               </li>
             ))}
           </ul>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

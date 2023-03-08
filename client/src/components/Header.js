@@ -1,57 +1,55 @@
 import { useDispatch, useSelector } from "react-redux";
 import { HamburgerSvg, SearchSvg, UserSvg, LeftArrowSvg } from "../assets/SVG";
-import { closeMenu, openMenu, toggleMenu } from "../utils/toggleSidebarSlice";
+import { closeMenu, openMenu, setIsDeviceLarge, toggleMenu } from "../utils/toggleSidebarSlice";
 import youtubeLogo from "../assets/youtubeLogo.png";
 import { useState, useEffect } from "react";
 import Searchbar from "./Searchbar";
 
 const Header = () => {
-  const [mQuery, setMQuery] = useState(window.innerWidth < 1024 ? false : true);
   const [isSearchbarActive, setIsSeachbarActive] = useState(false);
   const isMenuOpen = useSelector((store) => store.toggleSidebar.isSidebarOpen);
   const isWatchPageOpen = useSelector(
     (store) => store.toggleSidebar.isWatchPage
   );
+  const isDeviceLarge = useSelector((store)=>store.toggleSidebar.isDeviceLarge);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    let mediaQuery = window.matchMedia("(min-width: 1024px)");
+    const mediaQuery = window.matchMedia("(min-width: 1024px)");
     function handleChange(e) {
-      if (!e.matches) {
-        dispatch(closeMenu());
-      } else if (e.matches) {
-        dispatch(openMenu());
+      if (e.matches) {        
+        dispatch(openMenu());       
       }
-      setMQuery(e.matches);
+      else if (!e.matches) {
+        dispatch(closeMenu());
+      }
+      dispatch(setIsDeviceLarge(e.matches));
       setIsSeachbarActive(false);
     }
     mediaQuery.addEventListener("change", handleChange);
+
+    // this is the cleanup function to remove the listener
     return () => {
       mediaQuery.removeEventListener("change", handleChange);
     };
-
-    // this is the cleanup function to remove the listener
   }, []);
 
   useEffect(() => {
     const element = document.getElementById("outlet");
-    if (isMenuOpen && (isWatchPageOpen || !mQuery)) {
+    if (isMenuOpen && (isWatchPageOpen || !isDeviceLarge)) {
       document.body.style.overflow = "hidden";
       element.style.pointerEvents = "none";
     } else {
       document.body.style.overflow = "auto";
       element.style.pointerEvents = "all";
     }
-  }, [isWatchPageOpen, isMenuOpen, mQuery]);
+  }, [isWatchPageOpen, isMenuOpen, isDeviceLarge]);
 
-  const toggleMenuHandler = () => {
-    dispatch(toggleMenu());
-  };
-
+ 
   return (
     <div className="shadow-md p-4 pb-2 sticky top-0 z-50 bg-white">
-      {isSearchbarActive && !mQuery && (
+      {isSearchbarActive && !isDeviceLarge && (
         <div className="flex gap-4 md:gap-10">
           <div onClick={() => setIsSeachbarActive(false)}> <LeftArrowSvg /> </div>
           <div className="flex-1" onBlur={() => setIsSeachbarActive(false)}>
@@ -62,7 +60,7 @@ const Header = () => {
       {!isSearchbarActive && (
         <div className=" flex justify-between">
           <div className="w-1/3 lg:w-1/5 flex gap-8 md:gap-12 lg:gap-16 items-center">
-            <div className=" cursor-pointer" onClick={() => toggleMenuHandler()}>
+            <div className=" cursor-pointer" onClick={() => {dispatch(toggleMenu())}}>
               <HamburgerSvg />
             </div>
             <a href="/">
@@ -74,13 +72,13 @@ const Header = () => {
             </a>
           </div>
 
-          {!mQuery && (
+          {!isDeviceLarge && (
             <div className="flex justify-end flex-1 items-center pr-6" onClick={() => setIsSeachbarActive(true)}>
               <SearchSvg width="20px" height="20px" />
             </div>
           )}
 
-          {mQuery && <Searchbar />}
+          {isDeviceLarge && <Searchbar />}
 
           <div className="lg:w-1/5 flex justify-end px-4 relative z-0">
             <UserSvg width="40px" height="40px" />

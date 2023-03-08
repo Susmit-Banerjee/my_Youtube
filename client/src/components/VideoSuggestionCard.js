@@ -3,7 +3,7 @@ import { viewCountFormatFunction } from "../utils/helper";
 
 const VideoSuggestionCard = ({videoData}) => {
   return (
-    <Link to={"/watch?v="+videoData.videoId} className="flex py-2 lg:p-2 gap-2">
+    <Link to={"/watch?v="+videoData?.videoId} className="flex py-2 lg:p-2 gap-2">
       <div className="w-44">
         <img className="rounded-md" src={videoData?.thumbnail[0]?.url} alt="thumbnail" />
       </div>
