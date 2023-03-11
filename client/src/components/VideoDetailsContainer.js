@@ -11,7 +11,7 @@ const VideoDetailsContainer = ({ videoDetails }) => {
 
       <div id="channel-info" className="my-2 lg:flex lg:justify-between">
 
-        <div className="flex gap-2 items-center">
+        <div className="pl-2 flex gap-2 items-center">
           <UserSvg width="40px" height="40px" />
           <div className="flex pl-2 py-1 gap-2 md:gap-6 items-center lg:block lg:p-0">
             <p className="text-sm lg:text-base font-medium max-w-[60%] lg:max-w-none video-title-cutoff">
@@ -21,7 +21,7 @@ const VideoDetailsContainer = ({ videoDetails }) => {
           </div>
         </div>
 
-        <div id="btns" className="flex my-2 mx-2">
+        <div id="btns" className="flex my-2 lg:mx-2">
           <button
             id="like btn"
             className="flex items-center px-3 rounded-l-full  border-r-2 bg-gray-100 hover:bg-gray-200 cursor-pointer"

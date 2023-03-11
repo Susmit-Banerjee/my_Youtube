@@ -18,7 +18,7 @@ const Body = () => {
   return (
     <>
       <Header />
-      <div className="flex gap-4 my-4 mx-2 lg:m-4 relative h-full">
+      <div className="flex gap-4 my-4 lg:m-4 relative h-full">
         {isMenuOpen && (
           <div
             className={
@@ -31,7 +31,7 @@ const Body = () => {
         )}
         <div
           id="outlet"
-          className={"w-full p-2 flex-1 h-full " + backdropStyle}
+          className={"w-full flex-1 h-full " + backdropStyle}
         >
           <Outlet />
         </div>

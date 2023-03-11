@@ -26,9 +26,9 @@ const CommentCard = ({ data }) => {
 };
 
 const CommentsList = ({ comments }) =>
-  comments.map((comment, index) => (
-    <div>
-      <CommentCard key={index} data={comment} />
+  comments.map((comment,index) => (
+    <div key={comment?.id }>
+      <CommentCard data={comment} />
       <div className="pl-3 border-l lg:pl-6 lg:border-l-2 border-l-gray-200">
         <CommentsList comments={comment?.replies} />
       </div>

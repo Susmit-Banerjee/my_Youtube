@@ -9,7 +9,6 @@
   },
   "author": "Susmit Banerjee",
   "license": "ISC",
-  "proxy":"http://localhost:5000",
   "devDependencies": {
     "parcel": "^2.8.3",
     "postcss": "^8.4.21",

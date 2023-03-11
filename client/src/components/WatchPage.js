@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import {
   closeMenu,
-  openMenu,
   setIsWatchPage,
 } from "../utils/toggleSidebarSlice";
 import CommentsContainer from "./CommentsContainer";
@@ -13,8 +12,9 @@ import VideoSuggestionCard from "./VideoSuggestionCard";
 const WatchPage = () => {
   const [videoSuggestions, setVideoSuggestions] = useState([]);
   const [videoDetails, setVideoDetails] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const isDeviceLarge = useSelector((store)=>store.toggleSidebar.isDeviceLarge);
+  const isDeviceLarge = useSelector((store) => store.toggleSidebar.isDeviceLarge);
   const [isCommentVisible, setIsCommentVisible] = useState(false);
 
   const [searchParams] = useSearchParams();
@@ -24,11 +24,6 @@ const WatchPage = () => {
   useEffect(() => {
     dispatch(closeMenu());
     dispatch(setIsWatchPage(true));
-
-    return () => {
-      dispatch(openMenu());
-      dispatch(setIsWatchPage(false));
-    };
   }, []);
 
   useEffect(() => {
@@ -37,13 +32,15 @@ const WatchPage = () => {
   }, [id]);
 
   const getSuggections = async () => {
-    
+
     const data = await fetch(
       "http://localhost:5000/suggestions?video_id=" + id
     );
     const json = await data.json();
     console.log(json.data);
     setVideoSuggestions(json.data);
+    setIsLoading(false);
+
   };
 
   const getVideoDetails = async () => {
@@ -54,12 +51,13 @@ const WatchPage = () => {
     console.log(jsonVideoInfo?.items);
     setVideoDetails(jsonVideoInfo?.items);
   };
-  
+
   return (
-    <div className={"w-full lg:flex "}>
+    <div className={"w-screen lg:flex "}>
       <div className="w-full lg:w-[70%]">
         {/* ******** Embedded Video ******************** */}
-        <div className="w-full h-56 md:h-[420px] lg:h-[495px] lg:p-5 lg:pl-8">
+        <div className="w-full h-56 md:h-[420px] lg:h-[742.5px] lg:p-5 lg:pl-8 ">
+          {isLoading && <div className="w-full h-full top-5 bg-gray-400"></div>}
           <iframe
             className="w-full h-full top-5"
             src={"https://www.youtube.com/embed/" + id + "?rel=0"}
@@ -78,12 +76,14 @@ const WatchPage = () => {
 
         {/* ********** Comments Section ******************/}
 
-        <div id="comments" className="p-3 lg:m-5 lg:ml-8">
-          <div className="flex justify-between">
-            <h3 className="font-medium">1400 Comments</h3>
+        <div id="comments" className="p-3 lg:m-5 lg:ml-8 h-">
+          <div className="flex justify-between border-y border-y-gray-400 py-4">
+            <h3 className="font-medium text-gray-700">1545 Comments :</h3>
             {!isDeviceLarge && (
-              <div onClick={() => setIsCommentVisible(!isCommentVisible)}>
-                open/close
+              <div onClick={() => setIsCommentVisible(!isCommentVisible)} className="px-6 cursor-pointer" >
+                <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24">
+                  <path d="M12,21.7l-6.4-6.4l0.7-0.7l5.6,5.6l5.6-5.6l0.7,0.7L12,21.7z M18.4,8.6L12,2.3L5.6,8.6l0.7,0.7L12,3.7l5.6,5.6L18.4,8.6z"></path>
+                </svg>
               </div>
             )}
           </div>

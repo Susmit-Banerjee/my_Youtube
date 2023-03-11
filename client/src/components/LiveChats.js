@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { UserSvg } from "../assets/SVG";
 import { addMessage } from "../utils/chatSlice";
 import { generateRandomChat, generateRandomNames } from "../utils/helper";
+import { closeMenu } from "../utils/toggleSidebarSlice";
 import { setIsLive } from "../utils/videoCategorySlice";
 import ChatMsgCard from "./ChatMsgCard";
 
@@ -10,9 +11,13 @@ const LiveChats = () => {
   const [myMessage, setMyMessage] = useState("");
   const dispatch = useDispatch();
   const chatMessages = useSelector((store) => store.chatData.allChats);
+  const isDeviceLarge = useSelector((store)=>store.toggleSidebar.isDeviceLarge);
 
   useEffect(() => {
     
+    if(!isDeviceLarge){
+      dispatch(closeMenu());
+    }
     dispatch(setIsLive(true));
 
     //* ************************* API POlling **********************************
@@ -36,7 +41,7 @@ const LiveChats = () => {
 
 
   return (
-    <div className="w-full lg:w-5/6 h-[550px] flex justify-center">
+    <div className="w-full lg:w-5/6 h-[650px] lg:h-[720px] flex justify-center">
       <div className="w-full md:w-[90%] lg:w-3/5 border border-gray-300 rounded-lg flex flex-col justify-between px-4 pb-1">
         <div className="border-b border-b-gray-300">
           <p className="text-xl pb-2">Top Chats</p>

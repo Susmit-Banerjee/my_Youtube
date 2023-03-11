@@ -7,6 +7,7 @@ import WatchPage from "./components/WatchPage";
 import MainContentContainer from "./components/MainContentContainer";
 import LiveChats from "./components/LiveChats";
 import SearchPage from "./components/SearchPage";
+import Error from "./components/Error";
 
 /**
  * * APP LAYOUT
@@ -53,6 +54,7 @@ const appRouter = createBrowserRouter([
         element: <SearchPage />,
       },
     ],
+    errorElement: <Error />
   },
 ]);
 

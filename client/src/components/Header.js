@@ -46,13 +46,12 @@ const Header = () => {
     }
   }, [isWatchPageOpen, isMenuOpen, isDeviceLarge]);
 
- 
   return (
-    <div className="shadow-md p-4 pb-2 sticky top-0 z-50 bg-white">
+    <div className="shadow-md p-4 pb-2 sticky top-0 z-40 bg-white">
       {isSearchbarActive && !isDeviceLarge && (
         <div className="flex gap-4 md:gap-10">
           <div onClick={() => setIsSeachbarActive(false)}> <LeftArrowSvg /> </div>
-          <div className="flex-1" onBlur={() => setIsSeachbarActive(false)}>
+          <div className="flex-1">
             <Searchbar />
           </div>
         </div>
@@ -80,7 +79,7 @@ const Header = () => {
 
           {isDeviceLarge && <Searchbar />}
 
-          <div className="lg:w-1/5 flex justify-end px-4 relative z-0">
+          <div className="lg:w-1/5 flex justify-end px-4">
             <UserSvg width="40px" height="40px" />
           </div>
 
