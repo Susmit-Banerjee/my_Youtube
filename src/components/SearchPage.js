@@ -73,7 +73,6 @@ const SearchPage = () => {
   const search_query = searchParams.get("search_query");
 
   useEffect(() => {
-    console.log("api called");
     getSearchResults();
   }, [searchParams]);
 

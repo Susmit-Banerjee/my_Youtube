@@ -37,7 +37,6 @@ const WatchPage = () => {
       "http://localhost:5000/suggestions?video_id=" + id
     );
     const json = await data.json();
-    console.log(json.data);
     setVideoSuggestions(json.data);
     setIsLoading(false);
 
@@ -48,7 +47,6 @@ const WatchPage = () => {
       "http://localhost:5000/video_details?video_id=" + id
     );
     const jsonVideoInfo = await videoInfo.json();
-    console.log(jsonVideoInfo?.items);
     setVideoDetails(jsonVideoInfo?.items);
   };
 

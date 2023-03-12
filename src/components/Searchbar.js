@@ -15,8 +15,6 @@ const Searchbar = () => {
 
   useEffect(() => {
     const outsideClickHandler = (event) => {
-      console.log(event.target);
-      console.log(searchbarRef.current);
       if (!searchbarRef.current.contains(event.target)) {
         setShowSuggestion(false);
       }
@@ -56,7 +54,6 @@ const Searchbar = () => {
       "https://api-youtube.cyclic.app/autocomplete?q=" + inputQuery
     );
     const json = await data.json();
-    console.log(json);
     setSuggestions(json);
     dispatch(setCacheResults({ [inputQuery]: json }));
   };
