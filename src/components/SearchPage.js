@@ -82,7 +82,6 @@ const SearchPage = () => {
       "https://api-youtube.cyclic.app/results?search_query=" + search_query
     );
     const jsonData = await results.json();
-    console.log(jsonData);
     setSearchResults(jsonData);
     setIsLoading(false);
   };
