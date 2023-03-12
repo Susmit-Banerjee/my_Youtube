@@ -14,7 +14,7 @@
     white-space: pre-wrap;
     letter-spacing: -0.05em;
   }
-  .description:has(+ .expand-btn:not(:checked)):before {
+  .description:has(+ .expand-btn:not(:checked))::before {
     content: "";
     position: absolute;
     height: calc(2em*var(--line-height));
