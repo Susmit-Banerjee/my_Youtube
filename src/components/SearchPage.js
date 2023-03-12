@@ -79,7 +79,7 @@ const SearchPage = () => {
 
   const getSearchResults = async () => {
     const results = await fetch(
-      "http://localhost:5000/results?search_query=" + search_query
+      "https://api-youtube.cyclic.app/results?search_query=" + search_query
     );
     const jsonData = await results.json();
     console.log(jsonData);

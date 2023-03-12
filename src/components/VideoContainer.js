@@ -24,7 +24,7 @@ const VideoContainer = () => {
   }, [country, categoryId]);
 
   const getVideos = async () => {
-    const data = await fetch("http://localhost:5000/api?countryId=" + country + (categoryId ? "&videoCategoryId=" + categoryId : ""));
+    const data = await fetch("https://api-youtube.cyclic.app/api?countryId=" + country + (categoryId ? "&videoCategoryId=" + categoryId : ""));
 
     const jsonData = await data.json();
     console.log(jsonData.items);
