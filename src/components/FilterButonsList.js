@@ -5,9 +5,9 @@ const FilterButonsList = () => {
       <div className="px-2 py-1 rounded-lg bg-gray-100 cursor-pointer hover:bg-gray-600 hover:text-white ">Gamimg</div>
       <div className="px-2 py-1 rounded-lg bg-gray-100 cursor-pointer hover:bg-gray-600 hover:text-white ">Podcasts</div>
       <div className="px-2 py-1 rounded-lg bg-gray-100 cursor-pointer hover:bg-gray-600 hover:text-white ">Animation</div>
-      <div className="px-2 py-1 rounded-lg bg-gray-100 cursor-pointer hover:bg-gray-600 hover:text-white ">News</div> 
       <div className="px-2 py-1 rounded-lg bg-gray-100 cursor-pointer hover:bg-gray-600 hover:text-white ">Kpop</div>
       <div className="px-2 py-1 rounded-lg bg-gray-100 cursor-pointer hover:bg-gray-600 hover:text-white ">Movies</div>
+      <div className="px-2 py-1 rounded-lg bg-gray-100 cursor-pointer hover:bg-gray-600 hover:text-white ">News</div> 
     </div>
   );
 };
