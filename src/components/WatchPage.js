@@ -34,7 +34,7 @@ const WatchPage = () => {
   const getSuggections = async () => {
 
     const data = await fetch(
-      "http://localhost:5000/suggestions?video_id=" + id
+      "https://api-youtube.cyclic.app/suggestions?video_id=" + id
     );
     const json = await data.json();
     setVideoSuggestions(json.data);
@@ -44,7 +44,7 @@ const WatchPage = () => {
 
   const getVideoDetails = async () => {
     const videoInfo = await fetch(
-      "http://localhost:5000/video_details?video_id=" + id
+      "https://api-youtube.cyclic.app/video_details?video_id=" + id
     );
     const jsonVideoInfo = await videoInfo.json();
     setVideoDetails(jsonVideoInfo?.items);
@@ -55,7 +55,7 @@ const WatchPage = () => {
       <div className="w-full lg:w-[70%]">
         {/* ******** Embedded Video ******************** */}
         <div className="w-full h-56 md:h-[420px] lg:h-[742.5px] lg:p-5 lg:pl-8 ">
-          {isLoading && <div className="w-full h-full top-5 bg-gray-400"></div>}
+          {isLoading && <div className="w-full h-full top-5 bg-gray-300"></div>}
           <iframe
             className="w-full h-full top-5"
             src={"https://www.youtube.com/embed/" + id + "?rel=0"}
