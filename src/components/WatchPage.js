@@ -34,7 +34,7 @@ const WatchPage = () => {
   const getSuggections = async () => {
 
     const data = await fetch(
-      "https://api-youtube.cyclic.app/suggestions?video_id=" + id
+      "http://localhost:5000/suggestions?video_id=" + id
     );
     const json = await data.json();
     console.log(json.data);
@@ -45,7 +45,7 @@ const WatchPage = () => {
 
   const getVideoDetails = async () => {
     const videoInfo = await fetch(
-      "https://api-youtube.cyclic.app/video_details?video_id=" + id
+      "http://localhost:5000/video_details?video_id=" + id
     );
     const jsonVideoInfo = await videoInfo.json();
     console.log(jsonVideoInfo?.items);
