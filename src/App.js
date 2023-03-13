@@ -61,7 +61,7 @@ const appRouter = createBrowserRouter([
 const App = () => {
   return (
     <Provider store={store}>
-      <div className="w-screen h-full">
+      <div className="w-screen h-full px-1">
         <RouterProvider router={appRouter} />
       </div>
     </Provider>
