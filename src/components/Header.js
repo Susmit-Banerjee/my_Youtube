@@ -47,7 +47,7 @@ const Header = () => {
   }, [isWatchPageOpen, isMenuOpen, isDeviceLarge]);
 
   return (
-    <div className="shadow-md p-4 pb-2 sticky top-0 z-40 bg-white">
+    <div className="w-full shadow-md p-4 pb-2 sticky top-0 z-40 bg-white">
       {isSearchbarActive && !isDeviceLarge && (
         <div className="flex gap-4 md:gap-10">
           <div onClick={() => setIsSeachbarActive(false)}> <LeftArrowSvg /> </div>
