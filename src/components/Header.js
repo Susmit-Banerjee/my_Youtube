@@ -51,7 +51,7 @@ const Header = () => {
       {isSearchbarActive && !isDeviceLarge && (
         <div className="max-w-full flex gap-2 md:gap-10">
           <div onClick={() => setIsSeachbarActive(false)}> <LeftArrowSvg /> </div>
-          <div className="w-3/4 mr-2">
+          <div className="w-3/4 md:w-auto mr-2">
             <Searchbar />
           </div>
         </div>
