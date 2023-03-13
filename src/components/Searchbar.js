@@ -59,7 +59,7 @@ const Searchbar = () => {
   };
 
   return (
-    <div ref={searchbarRef} className="w-full md:w-4/5 lg:w-1/2" tabIndex={0} onFocus={() => setShowSuggestion(true)}>
+    <div ref={searchbarRef} className="max-w-full md:w-4/5 lg:w-1/2" tabIndex={0} onFocus={() => setShowSuggestion(true)}>
       <Form
         method="get"
         action="/results"
