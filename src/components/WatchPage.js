@@ -34,7 +34,7 @@ const WatchPage = () => {
   const getSuggections = async () => {
 
     const data = await fetch(
-      "https://api-youtube.cyclic.app/suggestions?video_id=" + id
+      "https://api-youtube-z0um.onrender.com/suggestions?video_id=" + id
     );
     const json = await data.json();
     setVideoSuggestions(json.data);
@@ -44,7 +44,7 @@ const WatchPage = () => {
 
   const getVideoDetails = async () => {
     const videoInfo = await fetch(
-      "https://api-youtube.cyclic.app/video_details?video_id=" + id
+      "https://api-youtube-z0um.onrender.com/video_details?video_id=" + id
     );
     const jsonVideoInfo = await videoInfo.json();
     setVideoDetails(jsonVideoInfo?.items);
