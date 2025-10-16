@@ -51,7 +51,7 @@ const Searchbar = () => {
 
   const getSearchSuggestions = async () => {
     const data = await fetch(
-      "https://api-youtube.cyclic.app/autocomplete?q=" + inputQuery
+      "https://api-youtube-z0um.onrender.com/autocomplete?q=" + inputQuery
     );
     const json = await data.json();
     setSuggestions(json);
